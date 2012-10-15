@@ -97,23 +97,23 @@ import org.junit.runner.RunWith;
 @RunWith(RobolectricTestRunner.class)
 public class HelloAndroidActivityTest {
 
-    private HelloAndroidActivity activity;
+  private HelloAndroidActivity activity;
 
-    @Before
-        public void setUp() {
-            activity = new HelloAndroidActivity();
-            activity.onCreate(null);
-        }
+  @Before
+  public void setUp() {
+    activity = new HelloAndroidActivity();
+    activity.onCreate(null);
+  }
 
-    @Test
-        public void itProperlyGreetsYou() {
-            assertThat(textOf(id.greet_them), equalTo("Hello android-travis-ci-example!"));
-        }
+  @Test
+  public void itProperlyGreetsYou() {
+    assertThat(textOf(id.greet_them), equalTo("Hello android-travis-ci-example!"));
+  }
 
-    private String textOf(int id) {
-        final TextView textView = (TextView)activity.findViewById(id);
-        return textView.getText().toString();
-    }
+  private String textOf(int id) {
+    final TextView textView = (TextView)activity.findViewById(id);
+    return textView.getText().toString();
+  }
 }
 {% endhighlight %}
 
