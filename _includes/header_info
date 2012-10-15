@@ -1,5 +1,5 @@
 <h1><a class="home" href="http://leviwilson.com/">leviwilson.com</a></h1>
-<p>Levi Wilson's GitHub Page</p>
+<p>Welcome to the GitHub page of Levi Wilson.</p>
 <p class="view"><a href="https://github.com/leviwilson">View My GitHub Profile</a></p>
 <h3>Blog Entries</h3>
 {% for post in site.posts %}

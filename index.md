@@ -2,11 +2,8 @@
 layout: default
 title: "leviwilson.github.com"
 ---
-
-# Welcome
-Thank you for visiting @leviwilson's Github page.  Below are some projects that are being actively worked on.  Please fork me if anything interests you...I would totally fork you.
-
 # Projects
+Here is a list of some of the latest projects that I have been working on.  To see a full list, check out my [GitHub profile](http://github.com/leviwilson) page.
 
 ## brazenhead
 [brazenhead](https://github.com/leandog/brazenhead) is a low-level driver for Android applications.  [brazenhead](https://github.com/leandog/brazenhead) allows you to instrument any application using a very simple json API with very little setup.
