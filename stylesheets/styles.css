@@ -38,6 +38,12 @@ a {
   text-decoration:none;
 }
 
+a.home {
+  color:#000;
+  font-weight:400;
+  text-decoration:none;
+}
+
 a small {
   font-size:11px;
   color:#777;
@@ -96,7 +102,7 @@ img {
 }
 
 header {
-  width:270px;
+  width:250px;
   float:left;
   position:fixed;
 }
@@ -118,7 +124,7 @@ header ul {
   border-radius:5px;
   border:1px solid #d2d2d2;
   box-shadow:inset #fff 0 1px 0, inset rgba(0,0,0,0.03) 0 -1px 0;
-  width:270px;
+  width:250px;
 }
 
 header li {
@@ -177,7 +183,7 @@ hr {
 }
 
 footer {
-  width:270px;
+  width:250px;
   float:left;
   position:fixed;
   bottom:50px;

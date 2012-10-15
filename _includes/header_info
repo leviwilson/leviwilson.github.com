@@ -1,3 +1,7 @@
-<h1>leviwilson.com</h1>
+<h1><a class="home" href="http://leviwilson.com/">leviwilson.com</a></h1>
 <p>Levi Wilson's GitHub Page</p>
 <p class="view"><a href="https://github.com/leviwilson">View My GitHub Profile</a></p>
+<h3>Blog Entries</h3>
+{% for post in site.posts %}
+<p>{{ post.date | date: "%B %e, %Y" }} <a href="{{ post.url }}">{{ post.title }}</a></p>
+{% endfor %}

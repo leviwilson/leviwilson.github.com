@@ -6,11 +6,6 @@ title: "leviwilson.github.com"
 # Welcome
 Thank you for visiting @leviwilson's Github page.  Below are some projects that are being actively worked on.  Please fork me if anything interests you...I would totally fork you.
 
-# Blog Entries
-{% for post in site.posts %}
-* {{ post.date | date: "%B %e, %Y" }} [{{ post.title }}]({{ post.url }})
-{% endfor %}
-
 # Projects
 
 ## brazenhead
