@@ -18,9 +18,9 @@ Thank you for visiting @leviwilson's Github page.  Below are some projects that 
 
 ### Getting Started
 
-```
+{% highlight bash %}
 $ gem install brazenhead
-```
+{% endhighlight %}
 After this, the only thing that [brazenhead](https://github.com/leandog/brazenhead) requires is to know some information about the application you are trying to instrument.
 
 {% highlight ruby %}
@@ -37,7 +37,7 @@ server.start "SomeActivity"
 ### Defining a screen
 To define a screen, simply use some of [gametel's](https://github.com/leandog/gametel) default accessors to define the controls that you have on your activity.  Here is an example of a login screen page's definition.
 
-```ruby
+{% highlight ruby %}
 class LoginPage
   include Gametel
 
@@ -45,14 +45,14 @@ class LoginPage
   text(:password, :index => 1)
   button(:login, :text => 'Login')
 end
-```
+{% endhighlight %}
 
 That's it!  The only thing left is to utilize your newly defined page-object in your step definitions.
 
-```ruby
+{% highlight ruby %}
 on(LoginPage) do |page|
   page.username = 'levi'
   page.password = 'secret'
   page.login
 end
-```
+{% endhighlight %}
