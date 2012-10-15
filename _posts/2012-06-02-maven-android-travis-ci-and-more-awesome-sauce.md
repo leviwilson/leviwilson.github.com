@@ -9,17 +9,17 @@ title:  "Maven, Android, Travis-CI and More Awesome Sauce"
 
 Recently I started working on an Android application for a side project.  From the beginning, one thing I wanted to accomplish was to setup continuous integration from the get-go.  After looking into it for a bit, I discovered that there were three potential options for me:
 
-* Setup my own CI server using something like Amazon EC2 or Linode
-* Use CloudBees (a cloud based Jenkins solution)
-* Use travis-ci (an open-source hosted CI service)
+* Setup my own CI server using something like [Amazon EC2](http://aws.amazon.com/ec2/) or [Linode](http://www.linode.com/)
+* Use [CloudBees](http://wiki.cloudbees.com/bin/view/DEV/Android) (a cloud based Jenkins solution)
+* Use [travis-ci](http://travis-ci.org/) (an open-source hosted CI service)
 
-Of those three options, the only one that would allow me to test my application on an actual Android emulator was the first, and since I wanted to spend exactly $0 towards it, the latter two were more appealing.  Since I have traditionally used Jenkins in the past for my Android applications, I decided to go with a combination of Maven, the maven-android-plugin and travis-ci for this project.
+Of those three options, the only one that would allow me to test my application on an actual Android emulator was the first, and since I wanted to spend exactly $0 towards it, the latter two were more appealing.  Since I have traditionally used Jenkins in the past for my Android applications, I decided to go with a combination of [Maven](http://maven.apache.org/), the [maven-android-plugin](http://code.google.com/p/maven-android-plugin/wiki/GettingStarted) and travis-ci for this project.
 
-I don't blog much (as you can see), but after a bit of struggle with getting this building successfully on travis-ci I decided to share my experiences with this.  I have made the example test project available on Github.
+I don't blog much (as you can see), but after a bit of struggle with getting this building successfully on travis-ci I decided to share my experiences with this.  I have made the [example test project](https://github.com/leviwilson/android-travis-ci-example) available on Github.
 
 #  Creating the project
 
-Using the maven-android-plugin, I created the skeleton application using the example on android-quickstart-archetype.  Here is the command that I used for my sample project:
+Using the maven-android-plugin, I created the skeleton application using the example on [android-quickstart-archetype](http://stand.spree.de/wiki_details_maven_archetypes).  Here is the command that I used for my sample project:
 
 {% highlight bash %}
 mvn archetype:generate -DarchetypeArtifactId=android-quickstart \
@@ -34,21 +34,21 @@ The only information that you need to modify from this example would be the `gro
 
 ## Setting up travis-ci
 
-If we add a vanilla .travis.yml file to our application, you'll notice that out of the box we will get a build failure.
+If we add a vanilla [.travis.yml](https://github.com/leviwilson/android-travis-ci-example/blob/a578cd59e3220ff205af682b121d0fb06f1cdfc2/.travis.yml) file to our application, you'll notice that out of the box [we will get a build failure](http://travis-ci.org/#!/leviwilson/android-travis-ci-example/builds/1511700).
 
 {% highlight yaml %}
 language: java
 {% endhighlight %}
 
-Not surprisingly it is because the travis-ci build agents do not have any sort of android environment setup on them.   To get around this, we will need to take advantage of the various hooks in the build lifecycle that travis-ci provides you to setup an android environment prior to building our application.  In order to do this, we will need to do the following in our .travis.yml:
+Not surprisingly it is because the travis-ci build agents do not have any sort of android environment setup on them.   To get around this, we will need to take advantage of the [various hooks in the build lifecycle](http://about.travis-ci.org/docs/user/build-configuration/) that travis-ci provides you to setup an android environment prior to building our application.  In order to do this, we will need to do the following in our `.travis.yml`:
 
 *  download the latest android SDK and unzip it
-*  setup the ANDROID_HOME environment variable to point to the SDK that we downloaded
-*  fix up our PATH variable to point to the tools and platform-tools directory in our SDK
+*  setup the `ANDROID_HOME` environment variable to point to the SDK that we downloaded
+*  fix up our `PATH` variable to point to the `tools` and `platform-tools` directory in our SDK
 *  tell our android environment to update our local SDK with the target API that we are building our application for
 
 ### Choosing the Right Environment
-Since travis-ci has a limited amount of space that we can take up and the full Android environment is huge, we will need to tell android to only grab the specific SDK that our application is building for.  To find this information out, you can run the `android list` sdk command from your terminal.  Doing so will give you a list of what is available to update.  Since we are targeting our application for API Level 10, we will want to note the package number (9).
+Since travis-ci has a limited amount of space that we can take up and the full Android environment is huge, we will need to tell android to only grab the specific SDK that our application is building for.  To find this information out, you can run the `android list sdk` command from your terminal.  Doing so will give you a list of what is available to update.  Since we are targeting our application for API Level 10, we will want to note the package number (9).
 
 {% highlight basedir %}
 Packages available for installation or update: 66
@@ -75,10 +75,10 @@ In addition to choosing the proper platform SDKs that your application builds fo
 
 ## Robolectric
 
-For those that haven't at least checked out Robolectric to test drive your Android applications, do yourself a favor.  I had heard about Robolectric when I first started writing Android applications, but at the time thought it would be more prudent to use the tools available through android.test.  Currently, I support a good mixture between Robolectric at the unit level and android.test at the integration level, but that is a topic for another blog post. 
+For those that haven't at least checked out [Robolectric](http://pivotal.github.com/robolectric/) to test drive your Android applications, do yourself a favor.  I had heard about Robolectric when I first started writing Android applications, but at the time thought it would be more prudent to use the tools available through [android.test](http://developer.android.com/reference/android/test/package-summary.html).  Currently, I support a good mixture between Robolectric at the unit level and android.test at the integration level, but that is a topic for another blog post. 
 
 ### Including Robolectric In Your pom.xml
-Robolectric has a good quick start guide to adding it to your Maven project.  The general idea is to have entries for Robolectric and JUnit in your `<dependencies />` entry of your `pom.xml`.  For this project, I've just added a simple test that verifies we get the proper greeting message when the application starts.  Listed below are my `HelloAndroidActivityTest.java` and my `pom.xml`.
+Robolectric has a [good quick start guide](http://pivotal.github.com/robolectric/maven-quick-start.html) to adding it to your Maven project.  The general idea is to have entries for Robolectric and JUnit in your `<dependencies />` entry of your `pom.xml`.  For this project, I've just added a simple test that verifies we get the proper greeting message when the application starts.  Listed below are my `HelloAndroidActivityTest.java` and my `pom.xml`.
 
 {% highlight java %}
 package com.leviwilson.android;
@@ -198,7 +198,7 @@ public class HelloAndroidActivityTest {
 
 ## Putting it all together
 
-Now that you know what API level to include and our Maven project is setup to build our test, the only thing left to do is to perform the steps needed in the before_install portion of our .travis.yml.  Here is what our resulting file looks like:
+Now that you know what API level to include and our Maven project is setup to build our test, the only thing left to do is to perform the steps needed in the `before_install` portion of our [.travis.yml](https://github.com/leviwilson/android-travis-ci-example/blob/5c8e802994075f5be434fae1adabf1406f68828d/.travis.yml).  Here is what our resulting file looks like:
 
 {% highlight yaml %}
 language: java
@@ -210,7 +210,7 @@ before_install:
   - android update sdk --filter 1,2,9 --no-ui --force
 {% endhighlight %}
 
-And there you have it.  After setting up the appropriate android environment in the travis-ci environment, we are now green.
+And there you have it.  After setting up the appropriate android environment in the travis-ci environment, [we are now green](http://travis-ci.org/#!/leviwilson/android-travis-ci-example/builds/1512189).
 
 ## Summary
 
