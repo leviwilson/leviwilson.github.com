@@ -23,13 +23,13 @@ $ gem install brazenhead
 ```
 After this, the only thing that [brazenhead](https://github.com/leandog/brazenhead) requires is to know some information about the application you are trying to instrument.
 
-```ruby
+{% highlight ruby %}
 # tell brazenhead where your application is
 server = Brazenhead::Server.new "path/to/your/app.apk"
 
 # start the activity that you'd like to instrument
 server.start "SomeActivity"
-```
+{% endhighlight %}
 
 ## gametel
 [gametel](https://github.com/leandog/gametel) is a higher-level abstraction around android cucumber drivers (in particular, [brazenhead](https://github.com/leandog/brazenhead)).  gametel provides for a page-object pattern around lower-level cucumber drivers for Android.  This allows for you to write very simple abstractions to instrument your Android applications.
