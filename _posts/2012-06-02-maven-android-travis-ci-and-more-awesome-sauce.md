@@ -51,7 +51,7 @@ Not surprisingly it is because the travis-ci build agents do not have any sort o
 ### Choosing the Right Environment
 Since travis-ci has a limited amount of space that we can take up and the full Android environment is huge, we will need to tell android to only grab the specific SDK that our application is building for.  To find this information out, you can run the `android list sdk` command from your terminal.  Doing so will give you a list of what is available to update.  Since we are targeting our application for API Level 10, we will want to note the package number (9).
 
-{% highlight basedir %}
+{% highlight bash %}
 Packages available for installation or update: 66
    1- Android SDK Tools, revision 19
    2- Android SDK Platform-tools, revision 11
