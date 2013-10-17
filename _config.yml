@@ -1,1 +1,9 @@
-markdown: maruku
+pygments: true
+markdown: redcarpet
+redcarpet:
+  extensions:
+    - hard_warp
+    - no_intra_emphasis
+    - autolink
+    - strikethrough
+    - fenced_code_blocks
